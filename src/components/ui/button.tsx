@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 relative overflow-hidden uppercase tracking-[0.22em] text-xs",
   {
     variants: {
       variant: {
@@ -15,11 +15,27 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        neonCyan: [
+          "bg-transparent text-[hsl(185_100%_64%)] border border-[hsl(185_100%_64%/0.9)]",
+          "shadow-[0_0_8px_hsl(185_100%_64%/0.6),0_0_18px_hsl(185_100%_64%/0.5)]",
+          "[text-shadow:0_0_4px_hsl(185_100%_64%/0.8)]",
+          "hover:-translate-y-0.5",
+          "hover:shadow-[0_0_14px_hsl(185_100%_64%/0.7),0_0_24px_hsl(315_100%_71%/0.6)]",
+          "hover:border-[hsl(0_0%_100%/0.7)]",
+        ].join(" "),
+        neonPink: [
+          "bg-transparent text-[hsl(315_100%_71%)] border border-[hsl(315_100%_71%/0.9)]",
+          "shadow-[0_0_8px_hsl(315_100%_71%/0.6),0_0_18px_hsl(315_100%_71%/0.5)]",
+          "[text-shadow:0_0_4px_hsl(315_100%_71%/0.8)]",
+          "hover:-translate-y-0.5",
+          "hover:shadow-[0_0_14px_hsl(185_100%_64%/0.7),0_0_24px_hsl(315_100%_71%/0.6)]",
+          "hover:border-[hsl(0_0%_100%/0.7)]",
+        ].join(" "),
       },
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        lg: "h-12 px-7 py-3.5",
         icon: "h-10 w-10",
       },
     },
@@ -27,7 +43,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface ButtonProps
@@ -40,7 +56,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
-  },
+  }
 );
 Button.displayName = "Button";
 
