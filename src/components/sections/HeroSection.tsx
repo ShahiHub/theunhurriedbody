@@ -1,7 +1,21 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollHint } from "@/components/ScrollHint";
+import heroTitleGif from "@/assets/hero-title.gif";
+import heroTitleStatic from "@/assets/hero-title-static.png";
 
 export function HeroSection() {
+  const [heroImage, setHeroImage] = useState(heroTitleGif);
+
+  useEffect(() => {
+    // Swap from animated GIF to static PNG after 4 seconds
+    const timer = setTimeout(() => {
+      setHeroImage(heroTitleStatic);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section
       id="hero"
@@ -11,17 +25,11 @@ export function HeroSection() {
         {/* Hero Media */}
         <div className="relative max-w-[min(1150px,84vw)] justify-self-center rounded-3xl overflow-hidden z-0">
           <div className="absolute -inset-4 rounded-[32px] bg-[radial-gradient(circle_at_center,transparent_55%,hsl(0_0%_0%)_100%)] blur-[18px] -z-10" />
-          <div className="relative w-full aspect-video bg-gradient-to-br from-background via-card to-background rounded-3xl flex items-center justify-center p-8">
-            <div className="text-center">
-              <h1 className="font-display text-4xl md:text-6xl lg:text-7xl tracking-[0.18em] uppercase text-foreground mb-2">
-                <span className="text-accent-cyan text-glow-cyan">Justin</span>{" "}
-                <span className="text-accent-pink text-glow-pink">Nelson</span>
-              </h1>
-              <p className="font-display text-lg md:text-xl tracking-[0.28em] uppercase text-muted-foreground">
-                Alexander Technique
-              </p>
-            </div>
-          </div>
+          <img
+            src={heroImage}
+            alt="Justin Nelson Alexander Technique neon title"
+            className="block w-full h-auto max-h-[80vh] object-contain rounded-3xl"
+          />
         </div>
 
         {/* Hero Copy */}
