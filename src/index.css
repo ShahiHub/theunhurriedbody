@@ -56,6 +56,10 @@
     @apply border-border;
   }
 
+  html, body {
+  height: 100%;
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
@@ -64,9 +68,8 @@
   body {
     background-image: url('/images/background.png');
     background-repeat: repeat;
-    background-attachment: fixed;
-    @apply bg-background text-foreground font-body antialiased;
-    overflow-y: auto;
+    background-size: auto;     /* key: do NOT scale */
+    background-position: top left;
   }
 }
 
