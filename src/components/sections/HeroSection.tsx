@@ -8,13 +8,21 @@ export function HeroSection() {
   const [heroImage, setHeroImage] = useState(heroTitleGif);
 
   useEffect(() => {
-    // Swap from animated GIF to static PNG after 4 seconds
-    const timer = setTimeout(() => {
-      setHeroImage(heroTitleStatic);
-    }, 4000);
+  // Preload both so swapping doesn't wait for first-time download
+  const preloadGif = new Image();
+  preloadGif.src = heroTitleGif;
 
-    return () => clearTimeout(timer);
-  }, []);
+  const preloadPng = new Image();
+  preloadPng.src = heroTitleStatic;
+
+  // Swap from animated GIF to static PNG after 4 seconds
+  const timer = setTimeout(() => {
+    setHeroImage(heroTitleStatic);
+  }, 4000);
+
+  return () => clearTimeout(timer);
+}, []);
+
 
   return (
     <section
@@ -26,10 +34,13 @@ export function HeroSection() {
         <div className="relative max-w-[min(1150px,84vw)] justify-self-center rounded-3xl overflow-hidden z-0">
           <div className="absolute -inset-4 rounded-[32px] bg-[radial-gradient(circle_at_center,transparent_55%,hsl(0_0%_0%)_100%)] blur-[18px] -z-10" />
           <img
-            src={heroImage}
-            alt="Justin Nelson Alexander Technique neon title"
-            className="block w-full h-auto max-h-[80vh] object-contain rounded-3xl"
-          />
+          src={heroImage}
+          alt="Justin Nelson Alexander Technique neon title"
+          className="block w-full h-auto max-h-[80vh] object-contain rounded-3xl"
+          loading="eager"
+          fetchPriority="high"
+        />
+
         </div>
 
         {/* Hero Copy */}
