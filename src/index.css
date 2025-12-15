@@ -71,7 +71,7 @@
     background-size: 1536px 1024px !important; /* EXACT file size */
     background-position: 0 0;
   }
-
+}
 
 @layer utilities {
   .glow-cyan {
