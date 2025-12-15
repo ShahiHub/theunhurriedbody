@@ -66,12 +66,12 @@
   }
 
   body {
-    background-image: url('/theunhurriedbody/background.png');
+    background-image: url("/theunhurriedbody/background.png");
     background-repeat: repeat;
-    background-size: auto !important;   /* prevents scaling */
+    background-size: 1536px 1024px !important; /* EXACT file size */
     background-position: 0 0;
   }
-}
+
 
 @layer utilities {
   .glow-cyan {
